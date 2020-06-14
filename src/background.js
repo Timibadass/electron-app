@@ -1,5 +1,6 @@
 "use strict";
-
+/* global __static */
+import path from "path";
 import { app, protocol, BrowserWindow } from "electron";
 import {
     createProtocol,
@@ -12,15 +13,20 @@ const isDevelopment = process.env.NODE_ENV !== "production";
 let win;
 
 // Scheme must be registered before the app is ready
-protocol.registerSchemesAsPrivileged([
-    { scheme: "app", privileges: { secure: true, standard: true } },
-]);
+protocol.registerSchemesAsPrivileged([{
+    scheme: "app",
+    privileges: {
+        secure: true,
+        standard: true,
+    },
+}, ]);
 
 function createWindow() {
     // Create the browser window.
     win = new BrowserWindow({
-        width: 800,
+        width: 1000,
         height: 600,
+        icon: path.join(__static, "icon.png"),
         webPreferences: {
             // Use pluginOptions.nodeIntegration, leave this alone
             // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
