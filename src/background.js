@@ -1,7 +1,7 @@
 "use strict";
 /* global __static */
 import path from "path";
-import { app, protocol, BrowserWindow } from "electron";
+import { app, Menu, protocol, BrowserWindow } from "electron";
 import {
     createProtocol,
     installVueDevtools,
@@ -71,6 +71,20 @@ app.on("activate", () => {
 // Some APIs can only be used after this event occurs.
 app.on("ready", async() => {
     if (isDevelopment && !process.env.IS_TEST) {
+        const dockMenu = Menu.buildFromTemplate([{
+                label: "New Window",
+                click() {
+                    console.log("New Window");
+                },
+            },
+            {
+                label: "New Window with Settings",
+                submenu: [{ label: "Basic" }, { label: "Pro" }],
+            },
+            { label: "New Command..." },
+        ]);
+
+        app.dock.setMenu(dockMenu);
         // Install Vue Devtools
         // Devtools extensions are broken in Electron 6.0.0 and greater
         // See https://github.com/nklayman/vue-cli-plugin-electron-builder/issues/378 for more info
