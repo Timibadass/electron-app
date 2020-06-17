@@ -26,6 +26,7 @@ function createWindow() {
     win = new BrowserWindow({
         width: 1000,
         height: 600,
+        title: "News App",
         icon: path.join(__static, "icon.png"),
         webPreferences: {
             // Use pluginOptions.nodeIntegration, leave this alone
@@ -33,6 +34,7 @@ function createWindow() {
             nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
         },
     });
+    win.on("page-title-updated", (event) => event.preventDefault());
 
     if (process.env.WEBPACK_DEV_SERVER_URL) {
         // Load the url of the dev server if in development mode
