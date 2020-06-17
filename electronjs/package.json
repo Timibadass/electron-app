@@ -1,0 +1,16 @@
+{
+    "name": "electronjs",
+    "version": "1.0.0",
+    "description": "my awesome electron-app",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron .",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {
+        "electron": "^9.0.4"
+    },
+    "devDependencies": {},
+    "author": "timibadass",
+    "license": "ISC"
+}
