@@ -36,16 +36,11 @@
 			...mapActions(["getTopNews"]),
 			async fetchTopNews() {
 				let countriesLength = this.countries.length;
-				let countryIndex = Math.floor(
-					Math.random() * (countriesLength - 1) + 1
-				);
+				let countryIndex = Math.floor(Math.random() * (countriesLength - 1) + 1);
 
 				this.countryInfo = this.countries[countryIndex];
-				// console.log(this.countryInfo);
 
-				let { data } = await this.getTopNews(
-					this.countries[countryIndex].value
-				);
+				let { data } = await this.getTopNews(this.countries[countryIndex].value);
 				this.articles = data.articles;
 			},
 		},
@@ -56,6 +51,6 @@
 	.articles__div {
 		display: flex;
 		flex-wrap: wrap;
-		justify-content: flex-start;
+		justify-content: center;
 	}
 </style>
