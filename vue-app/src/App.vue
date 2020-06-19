@@ -16,13 +16,14 @@
 </script>
 
 <style>
+	@import url("https://fonts.googleapis.com/css2?family=Abel&family=Staatliches&display=swap");
 	html,
 	#app {
 		min-height: 100vh;
 	}
 
 	#app {
-		font-family: Avenir, Helvetica, Arial, sans-serif;
+		font-family: "Abel", sans-serif;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 		text-align: center;
@@ -30,16 +31,21 @@
 		background-color: #fff;
 	}
 
-	#nav {
-		padding: 30px;
+	#app h1 {
+		font-family: "Staatliches", cursive;
 	}
 
-	#nav a {
+	a {
 		font-weight: bold;
 		color: #2c3e50;
+		text-decoration: none;
 	}
 
-	#nav a.router-link-exact-active {
+	a:hover {
+		text-decoration: underline;
+	}
+
+	a.router-link-exact-active {
 		color: #42b983;
 	}
 </style>
