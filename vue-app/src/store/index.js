@@ -27,7 +27,7 @@ const store = new Vuex.Store({
                 value: "za",
             },
         ],
-        category: [
+        categories: [
             "entertainment",
             "general",
             "health",
