@@ -2,9 +2,7 @@
 	<section class="news">
 		<div class="news__section">
 			<h1 class="news__title">
-				<a class="article__link" :href="article.url" target="_blank">
-					{{ article.title }}
-				</a>
+				<a class="article__link" :href="article.url" target="_blank">{{ article.title }}</a>
 			</h1>
 			<h3 class="news__author" v-if="article.author">{{ article.author }}</h3>
 			<!-- <p class="article__paragraph">{{ article.description }}</p> -->
@@ -25,7 +23,7 @@
 	export default {
 		name: "news-card",
 		props: {
-			article: Object,
+			article: Object
 		},
 		mounted() {
 			this.lazyLoadImages();
@@ -38,10 +36,10 @@
 					// If the image gets within 50px in the Y axis, start the download.
 					root: null, // Page as root
 					rootMargin: "0px",
-					threshold: 0.1,
+					threshold: 0.1
 				};
 
-				const fetchImage = (url) => {
+				const fetchImage = url => {
 					return new Promise((resolve, reject) => {
 						const image = new Image();
 						image.src = url;
@@ -50,15 +48,15 @@
 					});
 				};
 
-				const loadImage = (image) => {
+				const loadImage = image => {
 					const src = image.dataset.src;
 					fetchImage(src).then(() => {
 						image.src = src;
 					});
 				};
 
-				const handleIntersection = (entries) => {
-					entries.forEach((entry) => {
+				const handleIntersection = entries => {
+					entries.forEach(entry => {
 						if (entry.intersectionRatio > 0) {
 							loadImage(entry.target);
 						}
@@ -68,11 +66,11 @@
 				// The observer for the images on the page
 				const observer = new IntersectionObserver(handleIntersection, options);
 
-				images.forEach((img) => {
+				images.forEach(img => {
 					observer.observe(img);
 				});
-			},
-		},
+			}
+		}
 	};
 </script>
 
