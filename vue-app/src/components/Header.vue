@@ -4,7 +4,6 @@
 			<div class="logo__container">
 				<img src="../assets/logo.png" alt="News app logo" class="logo__image" />
 			</div>
-			<h1>News App</h1>
 		</div>
 		<nav class="nav">
 			<h4 class="nav__link">
@@ -22,7 +21,7 @@
 
 <script>
 	export default {
-		name: "app-header",
+		name: "app-header"
 	};
 </script>
 

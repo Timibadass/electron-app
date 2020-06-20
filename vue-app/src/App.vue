@@ -10,13 +10,13 @@
 	export default {
 		name: "layout",
 		components: {
-			appHeader,
-		},
+			appHeader
+		}
 	};
 </script>
 
 <style>
-	@import url("https://fonts.googleapis.com/css2?family=Abel&family=Staatliches&display=swap");
+	@import url("https://fonts.googleapis.com/css2?family=Abel&family=Lobster&family=Staatliches&display=swap");
 	html,
 	#app {
 		min-height: 100vh;
