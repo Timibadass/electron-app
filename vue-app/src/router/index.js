@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import TopNews from "../views/TopNews.vue";
+import CategoryNews from "../views/CategoryNews.vue";
 
 Vue.use(VueRouter);
 
@@ -19,6 +20,11 @@ const routes = [{
         path: "/top-news",
         name: "top news",
         component: TopNews,
+    },
+    {
+        path: "/news-by-category",
+        name: "News by category",
+        component: CategoryNews,
     },
     //   {
     //     path: '/about',

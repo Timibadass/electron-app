@@ -13,7 +13,7 @@
 				<router-link to="/top-news">Top News</router-link>
 			</h4>
 			<h4 class="nav__link">
-				<router-link to="/categories">News By Category</router-link>
+				<router-link to="/news-by-category">News By Category</router-link>
 			</h4>
 		</nav>
 	</header>
@@ -21,7 +21,7 @@
 
 <script>
 	export default {
-		name: "app-header"
+		name: "app-header",
 	};
 </script>
 

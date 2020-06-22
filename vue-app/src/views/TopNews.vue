@@ -1,14 +1,28 @@
 <template>
 	<section class="top-news">
 		<div class="country-selector__div">
-			<p>Select a country of your choice</p>
-			<select name="country" class="country__selector" id="country" v-model="country">
-				<option :value="country" v-for="(country, index) in countries" :key="index">{{ country.name }}</option>
+			<h4>Select a country of your choice</h4>
+			<select
+				name="country"
+				class="country__selector"
+				id="country"
+				v-model="country"
+			>
+				<option
+					:value="country"
+					v-for="(country, index) in countries"
+					:key="index"
+					>{{ country.name }}</option
+				>
 			</select>
 		</div>
 		<h4 v-if="articles">Top News from {{ country.name }}</h4>
 		<div class="articles__div" v-if="articles">
-			<news-card v-for="(article, index) in articles" :key="index" :article="article"></news-card>
+			<news-card
+				v-for="(article, index) in articles"
+				:key="index"
+				:article="article"
+			></news-card>
 		</div>
 		<div v-else class="top-news--empty">
 			<p>Loading...</p>
@@ -24,21 +38,21 @@
 		data() {
 			return {
 				country: "",
-				articles: null
+				articles: null,
 			};
 		},
 		components: {
-			NewsCard
+			NewsCard,
 		},
 		computed: {
 			...mapState(["countries"]),
-			...mapGetters(["getRandomCounty"])
+			...mapGetters(["getRandomCounty"]),
 		},
 		mounted() {
 			this.country = this.countries[this.getRandomCounty];
 		},
 		watch: {
-			country: "fetchTopNews"
+			country: "fetchTopNews",
 		},
 		methods: {
 			...mapActions(["getTopNews"]),
@@ -47,8 +61,8 @@
 				let country = this.country.value;
 				let { data } = await this.getTopNews(country);
 				this.articles = data.articles;
-			}
-		}
+			},
+		},
 	};
 </script>
 
