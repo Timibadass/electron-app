@@ -54,6 +54,13 @@ const store = new Vuex.Store({
             });
             return res;
         },
+        async getEveryNews(context, query = 'technology') {
+            let res = await axios({
+                url: `/everything?q=${query}`,
+                method: "GET",
+            });
+            return res;
+        },
     },
 });
 
