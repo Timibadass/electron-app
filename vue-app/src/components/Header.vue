@@ -29,6 +29,7 @@
 	.header {
 		display: flex;
 		flex-wrap: wrap;
+		padding: 0 10px;
 		justify-content: space-between;
 	}
 
