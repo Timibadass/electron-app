@@ -2,7 +2,12 @@
 	<section class="category">
 		<div class="category-selector__div">
 			<h4>Select a category of your choice</h4>
-			<select name="category" id="category" v-model="category">
+			<select
+				name="category"
+				id="category"
+				class="category__selector"
+				v-model="category"
+			>
 				<option
 					:value="category"
 					v-for="(category, index) in categories"
@@ -25,7 +30,7 @@
 				:article="article"
 			></news-card>
 		</div>
-		<div v-else class="top-news--empty">
+		<div v-else class="news--empty">
 			<p>Loading...</p>
 		</div>
 	</section>

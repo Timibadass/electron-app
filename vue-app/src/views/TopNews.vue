@@ -24,7 +24,7 @@
 				:article="article"
 			></news-card>
 		</div>
-		<div v-else class="top-news--empty">
+		<div v-else class="news--empty">
 			<p>Loading...</p>
 		</div>
 	</section>
@@ -77,27 +77,5 @@
 	.country__selector {
 		height: 30px;
 		width: auto;
-	}
-	.articles__div {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-	}
-	@keyframes blink {
-		from {
-			opacity: 1;
-		}
-		to {
-			opacity: 0;
-		}
-	}
-	.top-news--empty {
-		height: 250px;
-		margin-top: 30px;
-		animation: blink 0.8s ease-in-out infinite alternate both;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-family: "Lobster", cursive;
 	}
 </style>
