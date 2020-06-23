@@ -30,6 +30,9 @@
 		display: flex;
 		flex-wrap: wrap;
 		padding: 0 10px;
+		top: 0;
+		background-color: #fff;
+		position: sticky;
 		justify-content: space-between;
 	}
 
