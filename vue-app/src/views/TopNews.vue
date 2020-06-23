@@ -32,7 +32,7 @@
 
 <script>
 	import NewsCard from "@/components/NewsCard";
-	import { mapActions, mapState, mapGetters } from "vuex";
+	import { mapActions, mapState, mapMutations } from "vuex";
 	export default {
 		name: "top-news",
 		data() {
@@ -45,16 +45,19 @@
 			NewsCard,
 		},
 		computed: {
-			...mapState(["countries"]),
-			...mapGetters(["getRandomCounty"]),
+			...mapState(["countries", "countryIndex"]),
+		},
+		created() {
+			this.getRandomCounty();
 		},
 		mounted() {
-			this.country = this.countries[this.getRandomCounty];
+			this.country = this.countries[this.countryIndex];
 		},
 		watch: {
 			country: "fetchTopNews",
 		},
 		methods: {
+			...mapMutations(["getRandomCounty"]),
 			...mapActions(["getTopNews"]),
 			async fetchTopNews() {
 				this.articles = null;

@@ -27,6 +27,7 @@ const store = new Vuex.Store({
                 value: "za",
             },
         ],
+        countryIndex: '',
         categories: [
             "entertainment",
             "general",
@@ -37,14 +38,14 @@ const store = new Vuex.Store({
             "technology",
         ],
     },
-    getters: {
+    getters: {},
+    mutations: {
         getRandomCounty: state => {
             let countriesLength = state.countries.length;
             let countryIndex = Math.floor(Math.random() * (countriesLength - 1) + 1);
-            return countryIndex
+            state.countryIndex = countryIndex
         }
     },
-    mutations: {},
     actions: {
         async getTopNews(context, country) {
             let res = await axios({
