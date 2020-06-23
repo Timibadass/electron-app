@@ -10,8 +10,8 @@
 	export default {
 		name: "layout",
 		components: {
-			appHeader
-		}
+			appHeader,
+		},
 	};
 </script>
 
@@ -47,5 +47,29 @@
 
 	a.router-link-exact-active {
 		color: #42b983;
+	}
+
+	.articles__div {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	@keyframes blink {
+		from {
+			opacity: 1;
+		}
+		to {
+			opacity: 0;
+		}
+	}
+	.news--empty {
+		height: 250px;
+		margin-top: 30px;
+		animation: blink 0.8s ease-in-out infinite alternate both;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-family: "Lobster", cursive;
 	}
 </style>

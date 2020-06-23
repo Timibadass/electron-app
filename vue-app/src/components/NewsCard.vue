@@ -1,11 +1,11 @@
 <template>
 	<section class="news">
-		<div class="news__section">
+		<!-- <div class="news__section">
 			<h1 class="news__title">
 				<a class="article__link" :href="article.url" target="_blank">{{ article.title }}</a>
 			</h1>
 			<h3 class="news__author" v-if="article.author">{{ article.author }}</h3>
-			<!-- <p class="article__paragraph">{{ article.description }}</p> -->
+			<p class="article__paragraph">{{ article.description }}</p>
 			<h5 class="article__published">{{ new Date(article.publishedAt) }}</h5>
 		</div>
 		<div class="image__container">
@@ -15,6 +15,29 @@
 				:data-src="article.urlToImage"
 				:alt="article.title"
 			/>
+		</div> -->
+		<div class="article__info">
+			<h3 class="article__author">{{ article.author }}</h3>
+			<h4 class="article__published">
+				{{ $dayjs(article.publishedAt).format("DD-MM-YY") }}
+			</h4>
+		</div>
+		<div class="article__main">
+			<h1 class="article__title">
+				<a class="article__link" :href="article.url" target="_blank">{{
+					article.title
+				}}</a>
+			</h1>
+			<p class="article__paragraph">{{ article.description }}</p>
+
+			<div class="image__container">
+				<img
+					class="news__img"
+					src="../assets/logo.png"
+					:data-src="article.urlToImage"
+					:alt="article.title"
+				/>
+			</div>
 		</div>
 	</section>
 </template>
@@ -23,7 +46,7 @@
 	export default {
 		name: "news-card",
 		props: {
-			article: Object
+			article: Object,
 		},
 		mounted() {
 			this.lazyLoadImages();
@@ -36,10 +59,10 @@
 					// If the image gets within 50px in the Y axis, start the download.
 					root: null, // Page as root
 					rootMargin: "0px",
-					threshold: 0.1
+					threshold: 0.1,
 				};
 
-				const fetchImage = url => {
+				const fetchImage = (url) => {
 					return new Promise((resolve, reject) => {
 						const image = new Image();
 						image.src = url;
@@ -48,15 +71,15 @@
 					});
 				};
 
-				const loadImage = image => {
+				const loadImage = (image) => {
 					const src = image.dataset.src;
 					fetchImage(src).then(() => {
 						image.src = src;
 					});
 				};
 
-				const handleIntersection = entries => {
-					entries.forEach(entry => {
+				const handleIntersection = (entries) => {
+					entries.forEach((entry) => {
 						if (entry.intersectionRatio > 0) {
 							loadImage(entry.target);
 						}
@@ -66,11 +89,11 @@
 				// The observer for the images on the page
 				const observer = new IntersectionObserver(handleIntersection, options);
 
-				images.forEach(img => {
+				images.forEach((img) => {
 					observer.observe(img);
 				});
-			}
-		}
+			},
+		},
 	};
 </script>
 
@@ -79,55 +102,60 @@
 		width: 100%;
 		display: flex;
 		flex-direction: row;
-		align-items: flex-start;
-		max-width: 550px;
+		justify-content: space-between;
+		max-width: 700px;
 		box-shadow: 2px 1px 7px 1px #eee;
 		padding: 20px 5px;
 		box-sizing: border-box;
 		margin: 15px 5px;
 		border-radius: 4px;
 	}
-	.news__section {
+
+	.article__info {
 		width: 100%;
-		max-width: 350px;
-		margin-right: 5px;
+		max-width: 180px;
 	}
 
-	.news__title {
-		font-size: 15px;
-		text-align: left;
-		margin-top: 0;
+	.article__author {
+		font-weight: 500;
+		font-size: 16px;
+		line-height: 24px;
+		color: #0f0f0f;
 	}
 
-	.news__author {
-		font-size: 14px;
-		text-align: left;
-		font-weight: normal;
-	}
 	.article__published {
-		text-align: left;
+		font-weight: normal;
+		font-size: 14px;
+		line-height: 24px;
+		color: #0f0f0f;
+	}
+
+	.article__main {
+		width: 100%;
+		max-width: 500px;
+	}
+
+	.article__title {
+		font-weight: 600;
+		font-size: 24px;
+		line-height: 40px;
+		color: #0f0f0f;
+	}
+
+	.article__paragraph {
+		font-weight: normal;
+		font-size: 16px;
+		line-height: 24px;
+		color: #0f0f0f;
 	}
 
 	.image__container {
-		width: 100%;
-		max-width: 180px;
-		max-height: 180px;
+		max-width: 560px;
+		height: 280px;
 	}
 
 	.news__img {
-		transition: max-width 300ms cubic-bezier(0.4, 0, 1, 1),
-			max-height 300ms cubic-bezier(0.4, 0, 1, 1);
-		max-width: 150px;
-		max-height: 150px;
-	}
-
-	.news__img:hover {
-		max-width: 180px;
-		max-height: 180px;
-	}
-
-	.article__link {
-		text-decoration: none;
-		color: inherit;
+		max-width: 100%;
+		max-height: 100%;
 	}
 </style>

@@ -27,6 +27,7 @@
         "@vue/cli-plugin-router": "~4.4.0",
         "@vue/cli-service": "~4.4.0",
         "babel-eslint": "^10.1.0",
+        "dayjs": "^1.8.28",
         "electron": "^9.0.0",
         "electron-icon-builder": "^1.0.2",
         "eslint": "^6.7.2",

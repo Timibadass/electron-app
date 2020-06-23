@@ -1,16 +1,30 @@
 <template>
 	<section class="top-news">
 		<div class="country-selector__div">
-			<p>Select a country of your choice</p>
-			<select name="country" class="country__selector" id="country" v-model="country">
-				<option :value="country" v-for="(country, index) in countries" :key="index">{{ country.name }}</option>
+			<h4>Select a country of your choice</h4>
+			<select
+				name="country"
+				class="country__selector"
+				id="country"
+				v-model="country"
+			>
+				<option
+					:value="country"
+					v-for="(country, index) in countries"
+					:key="index"
+					>{{ country.name }}</option
+				>
 			</select>
 		</div>
 		<h4 v-if="articles">Top News from {{ country.name }}</h4>
 		<div class="articles__div" v-if="articles">
-			<news-card v-for="(article, index) in articles" :key="index" :article="article"></news-card>
+			<news-card
+				v-for="(article, index) in articles"
+				:key="index"
+				:article="article"
+			></news-card>
 		</div>
-		<div v-else class="top-news--empty">
+		<div v-else class="news--empty">
 			<p>Loading...</p>
 		</div>
 	</section>
@@ -18,37 +32,40 @@
 
 <script>
 	import NewsCard from "@/components/NewsCard";
-	import { mapActions, mapState, mapGetters } from "vuex";
+	import { mapActions, mapState, mapMutations } from "vuex";
 	export default {
 		name: "top-news",
 		data() {
 			return {
 				country: "",
-				articles: null
+				articles: null,
 			};
 		},
 		components: {
-			NewsCard
+			NewsCard,
 		},
 		computed: {
-			...mapState(["countries"]),
-			...mapGetters(["getRandomCounty"])
+			...mapState(["countries", "countryIndex"]),
+		},
+		created() {
+			this.getRandomCounty();
 		},
 		mounted() {
-			this.country = this.countries[this.getRandomCounty];
+			this.country = this.countries[this.countryIndex];
 		},
 		watch: {
-			country: "fetchTopNews"
+			country: "fetchTopNews",
 		},
 		methods: {
+			...mapMutations(["getRandomCounty"]),
 			...mapActions(["getTopNews"]),
 			async fetchTopNews() {
 				this.articles = null;
 				let country = this.country.value;
 				let { data } = await this.getTopNews(country);
 				this.articles = data.articles;
-			}
-		}
+			},
+		},
 	};
 </script>
 
@@ -60,27 +77,5 @@
 	.country__selector {
 		height: 30px;
 		width: auto;
-	}
-	.articles__div {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-	}
-	@keyframes blink {
-		from {
-			opacity: 1;
-		}
-		to {
-			opacity: 0;
-		}
-	}
-	.top-news--empty {
-		height: 250px;
-		margin-top: 30px;
-		animation: blink 0.8s ease-in-out infinite alternate both;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-family: "Lobster", cursive;
 	}
 </style>
