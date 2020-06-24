@@ -44,7 +44,7 @@
 		data() {
 			return {
 				articles: null,
-				category: "",
+				category: "general",
 			};
 		},
 		components: {
@@ -57,7 +57,6 @@
 			...mapState(["categories"]),
 		},
 		mounted() {
-			this.category = "general";
 			this.fetchEveryNews();
 		},
 		methods: {
