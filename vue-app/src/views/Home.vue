@@ -22,7 +22,6 @@
 	export default {
 		data() {
 			return {
-				articles: "",
 				countryInfo: "",
 			};
 		},
@@ -36,7 +35,7 @@
 			this.fetchTopNews();
 		},
 		computed: {
-			...mapState(["countries", "countryIndex"]),
+			...mapState(["countries", "countryIndex", "articles"]),
 		},
 		methods: {
 			...mapMutations(["getRandomCounty"]),
@@ -45,11 +44,13 @@
 				let countryIndex = this.countryIndex;
 
 				this.countryInfo = this.countries[countryIndex];
-
-				let { data } = await this.getTopNews(
-					this.countries[countryIndex].value
-				);
-				this.articles = data.articles;
+                try {
+                    await this.getTopNews(
+                        this.countries[countryIndex].value
+                    );
+                } catch (error) {
+                    console.error(error);
+                }
 			},
 		},
 	};

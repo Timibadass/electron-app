@@ -37,21 +37,21 @@
 		name: "top-news",
 		data() {
 			return {
-				country: "",
-				articles: null,
+				country: ""
 			};
 		},
 		components: {
 			NewsCard,
 		},
 		computed: {
-			...mapState(["countries", "countryIndex"]),
+			...mapState(["countries", "countryIndex", 'articles']),
 		},
 		created() {
 			this.getRandomCounty();
 		},
 		mounted() {
-			this.country = this.countries[this.countryIndex];
+            this.country = this.countries[this.countryIndex];
+            this.fetchTopNews()
 		},
 		watch: {
 			country: "fetchTopNews",
@@ -60,10 +60,13 @@
 			...mapMutations(["getRandomCounty"]),
 			...mapActions(["getTopNews"]),
 			async fetchTopNews() {
-				this.articles = null;
-				let country = this.country.value;
-				let { data } = await this.getTopNews(country);
-				this.articles = data.articles;
+                let country = this.country.value;
+                try {
+                    await this.getTopNews(country);
+                } catch (error) {
+                    console.error(error);
+                }
+				
 			},
 		},
 	};

@@ -37,6 +37,7 @@ const store = new Vuex.Store({
             "sports",
             "technology",
         ],
+        articles: null
     },
     getters: {},
     mutations: {
@@ -44,22 +45,27 @@ const store = new Vuex.Store({
             let countriesLength = state.countries.length;
             let countryIndex = Math.floor(Math.random() * (countriesLength - 1) + 1);
             state.countryIndex = countryIndex
+        },
+        saveTopNews: (state, articles) => {
+            state.articles = articles
         }
+
     },
     actions: {
-        async getTopNews(context, country) {
+        async getTopNews({ commit }, country) {
             let res = await axios({
                 url: `/top-headlines?country=${country}`,
                 method: "GET",
             });
-            return res;
+            commit('saveTopNews', res.data.articles);
         },
-        async getEveryNews(context, query = 'technology') {
+        async getEveryNews({ commit }, query = 'technology') {
             let res = await axios({
                 url: `/everything?q=${query}`,
                 method: "GET",
             });
-            return res;
+
+            commit('saveTopNews', res.data.articles);
         },
     },
 });

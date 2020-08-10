@@ -43,7 +43,6 @@
 		name: "category-news",
 		data() {
 			return {
-				articles: null,
 				category: "general",
 			};
 		},
@@ -54,7 +53,7 @@
 			category: "fetchEveryNews",
 		},
 		computed: {
-			...mapState(["categories"]),
+			...mapState(["categories", 'articles']),
 		},
 		mounted() {
 			this.fetchEveryNews();
@@ -63,11 +62,9 @@
 			...mapActions(["getEveryNews"]),
 			async fetchEveryNews() {
 				let query = this.category;
-				this.articles = null;
 
 				try {
-					let { data } = await this.getEveryNews(query);
-					this.articles = data.articles;
+					await this.getEveryNews(query);
 				} catch (error) {
 					console.error(error);
 				}
